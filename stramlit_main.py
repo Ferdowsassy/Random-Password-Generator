@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 import string
+import pyperclip
 
 st.title("Random Password Generator")
 
@@ -20,4 +21,10 @@ if st.button("Generate Password"):
         characters += string.punctuation
 
     password = ''.join(random.choice(characters) for _ in range(length))
+    
     st.text_input("Generated Password:", password, disabled=True)
+    
+    copy_button = st.button("📋 Copy Password")
+    if copy_button:
+        pyperclip.copy(password)
+        st.success("Copied to clipboard!")
